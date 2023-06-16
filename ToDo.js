@@ -78,34 +78,33 @@ app.get("/task/:ID", (request, response) => {
     //    description: "Error"}
     response.sendStatus(404);
   } else {
+  console.log("showing Task with updates" + u)
   response.status(200).send(task);
   }
 });
 
-app.put(`/task/:ID`, (request, response) => {
+app.put('/tasks/:ID', (request, response) => {
   // #swagger.tags = ["Tasks"]
   // #swagger.description = "Endpoint to make changes to an existing task, then return task"
-  const ID = parseInt(request.params.ID);
-  const Index = tasks.findIndex((task) => task.ID === ID);
-  const updatedTask = tasks.findIndex((b) => b.ID === ID);
-  if (Index === -1) {
-    // #swagger.responses[404] = {
-    // description: "Error"}
-    if (taskIndex === -1) {
-    // #swagger.responses[404] = {
-    // description: "Error"}
-      response.sendStatus(404);
-    } else {
-    
-    // mit ChatGPT korrigierte Zeile
-    tasks[Index] = {
-      ...tasks[Index],
+  const ID = request.params.ID;
+  const Task = tasks.findIndex((Task) => task.ID == ID);
+      if (!task){
+  // #swagger.responses[404] = {
+  // description: "Error"}
+          response.sendStatus(404);
+      }
+  const updatedTask = request.body;
+  tasks[Task] = {
+      ...tasks[Task],
       ...updatedTask
-    };
-      response.status(200).send(tasks[taskIndex]);
-    }
-  }
-});
+  };
+  console.log("showing Task with updates" + updatedTask)
+  // #swagger.responses[200] = {
+  // description: "Tasks",
+  // shema: [{
+  // $ref: "#/definitions/Task"}]}
+  response.status(200).json(tasks[Task]);
+})
 
 app.delete("/task/:ID", (request, response) => {
   // #swagger.tags = ["Tasks"]
@@ -173,9 +172,6 @@ app.delete("/logout", (request, response) => {
 // $ref: "#/definitions/login"}]}
   response.sendStatus(204);
 });
-
-
-
 
 
 
