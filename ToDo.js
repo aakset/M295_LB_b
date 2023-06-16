@@ -52,6 +52,7 @@ const tasks = [
 app.get("/tasks", (_, response) => {
     // #swagger.tags = ["Tasks"]
     // #swagger.description = "Endpoint to get Title of all Tasks"
+    console.log("")
     response.send(tasks);
 });
 
@@ -78,33 +79,34 @@ app.get("/task/:ID", (request, response) => {
     //    description: "Error"}
     response.sendStatus(404);
   } else {
-  console.log("showing Task with updates" + u)
+  console.log("showing Task with updates")
   response.status(200).send(task);
   }
 });
 
-app.put('/tasks/:ID', (request, response) => {
+app.put("/task/:ID", (request, response) => {
   // #swagger.tags = ["Tasks"]
-  // #swagger.description = "Endpoint to make changes to an existing task, then return task"
-  const ID = request.params.ID;
-  const Task = tasks.findIndex((Task) => task.ID == ID);
-      if (!task){
+  // #swagger.description = "Endpoint to update an existing task based on the given ID"
+  const ID = parseInt(request.params.ID);
+  const updatedTask = request.body.updatedTask;
+  const taskIndex = tasks.findIndex((task) => task.ID === ID);
+  if (taskIndex === -1) {
   // #swagger.responses[404] = {
-  // description: "Error"}
-          response.sendStatus(404);
-      }
-  const updatedTask = request.body;
-  tasks[Task] = {
-      ...tasks[Task],
-      ...updatedTask
-  };
-  console.log("showing Task with updates" + updatedTask)
+  // description: "Error: Task not found"}
+    response.sendStatus(404);
+    
+  } else {
+    tasks[taskIndex] = {
+      ...tasks[taskIndex],
+      ...updatedTask,
+    };
   // #swagger.responses[200] = {
   // description: "Tasks",
-  // shema: [{
-  // $ref: "#/definitions/Task"}]}
-  response.status(200).json(tasks[Task]);
-})
+  // schema: {
+  // $ref: "#/definitions/Task"}}
+    response.status(200).send(tasks[taskIndex]);
+  }
+});
 
 app.delete("/task/:ID", (request, response) => {
   // #swagger.tags = ["Tasks"]
