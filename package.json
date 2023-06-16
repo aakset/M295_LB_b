@@ -9,5 +9,8 @@
   "scripts": {
     "start": "nodemon 4.2_BibliothekAPI.js",
     "swagger-autogen": "node swagger.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.42.0"
   }
 }
