@@ -120,9 +120,8 @@ app.delete("/task/:ID", (request, response) => {
   // $ref: "#/definitions/Task"}]}
     response.sendStatus(204);
   } else {
-     // Task not found
   // #swagger.responses[404] = {
-  // description: "Error: Task not found"}
+  // description: "Error"}
     response.sendStatus(404);
   }
 });
@@ -132,20 +131,46 @@ app.delete("/task/:ID", (request, response) => {
 const pwd = "m295";
 app.post("/login", (request, response) => {
 // #swagger.tags = ["Login"]
-// #swagger.description = "Endpoint to log in with any email and the password m295"
+// #swagger.description = "Endpoint to log in with any email and the password m295 and receive session Token"
   const email = request.body.email;
   if (!email || request.body.pwd !== pwd) {
-    return response.status(401).send("Email or password incorrect");
+// #swagger.responses[401] = {
+// description: "Error"}
+  return response.status(401).json({ message: "No Email given or password incorrect!" });
   }
   request.session.email = request.body.email; 
-  response.status(200).send("Your logged in");
+// #swagger.responses[200] = {
+// description: "Login",
+// shema: [{
+// $ref: "#/definitions/login"}]}
+  return response.status(200).json({ message: "You're logged in!" });
 });
 
 app.get("/verify", (request, response) => {
+// #swagger.tags = ["Login"]
+// #swagger.description = "Endpoint to verify session Token"
   if (!request.session.email) {
-    return response.status(401).send("failed");
+// #swagger.responses[401] = {
+// description: "Error"}
+  return response.status(401).json({ message: "verification failed" });
   }
-  response.status(200).send("verified");
+// #swagger.responses[200] = {
+// description: "Login",
+// shema: [{
+// $ref: "#/definitions/login"}]}
+  return response.status(200).json({ message: "verified" });
+});
+
+app.delete("/logout", (request, response) => {
+// #swagger.tags = ["Login"]
+// #swagger.description = "Endpoint to log out"
+  request.session.cookie.maxAge = 0; 
+  request.session.destroy();
+// #swagger.responses[204] = {
+// description: "Login",
+// shema: [{
+// $ref: "#/definitions/login"}]}
+  response.sendStatus(204);
 });
 
 
