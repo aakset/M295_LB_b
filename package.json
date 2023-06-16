@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "nodemon": "^2.0.22",
+    "swagger-autogen": "^2.23.2",
+    "swagger-ui-express": "^4.6.3"
+  },
+  "scripts": {
+    "start": "nodemon 4.2_BibliothekAPI.js",
+    "swagger-autogen": "node swagger.js"
+  }
+}
