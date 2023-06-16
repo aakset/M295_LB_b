@@ -1,0 +1,71 @@
+commit 9f00b18d27bd9e289398bb61bb7e7176e179adf8
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 16:20:38 2023 +0200
+
+    README was worked on.
+
+commit 294d375b00ba707b9e5c021b8913c1ff2d46ad65
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 15:56:29 2023 +0200
+
+    Errorhandling integrated
+
+commit 4d702e1e11c5d36d91b4ecc7e6219a3507a88dc5
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 15:49:39 2023 +0200
+
+    Automatic Testing with postman
+
+commit b5308e123d12314b43011a164b4f0ecb041542b8
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 14:38:29 2023 +0200
+
+    swagger datei erstellt und swagger abgeschlossen
+
+commit a7f4174731f7cf03e59ad38636cf5fc89c9cb070
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 14:05:49 2023 +0200
+
+    Content-type Header & console.log erledigt
+
+commit 3f392451431bac571859a2f75e3d6e964293a9d3
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 13:28:16 2023 +0200
+
+    Corrections to PUT endpoint
+
+commit 2f4dbdd30649e1fb3db94e322dd8873def68d8c7
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 13:17:48 2023 +0200
+
+    Korrekturen PUT Endpoint
+
+commit 62cf0e4fccdbd9867fa943d29eb6f010baefc81b
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 12:26:33 2023 +0200
+
+    added Regular Expressions to login
+
+commit 592d0da83b97d807e894ee9e576171d68f8cd3a4
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 11:43:59 2023 +0200
+
+    Login, Verify & Logout Endpoints erstellt
+
+commit 48c2531c6bb8ac97a99709b1a0bc173931c7dae8
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 11:15:30 2023 +0200
+
+    modules installed & hauptanforderungen erledigt
+
+commit e64160a873ee68693d2e79c8c6cb7937a13563fc
+Author: aakashkbw <114473332+aakashkbw@users.noreply.github.com>
+Date:   Fri Jun 16 09:05:19 2023 +0200
+
+    initial commit
+
+commit 10f05ddbfa65c42f5ca9552c7b529a9f57189620
+Author: aakset <107983113+aakset@users.noreply.github.com>
+Date:   Fri Jun 16 08:57:38 2023 +0200
+
+    Initial commit
