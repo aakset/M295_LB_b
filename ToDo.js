@@ -133,7 +133,8 @@ app.post("/login", (request, response) => {
 // #swagger.tags = ["Login"]
 // #swagger.description = "Endpoint to log in with any email and the password m295 and receive session Token"
   const email = request.body.email;
-  if (!email || request.body.pwd !== pwd) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.(com|ch)$/;
+  if (!email || !emailRegex.test(email) || request.body.pwd !== pwd) {
 // #swagger.responses[401] = {
 // description: "Error"}
   return response.status(401).json({ message: "No Email given or password incorrect!" });
