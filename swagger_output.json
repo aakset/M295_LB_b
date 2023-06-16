@@ -1,0 +1,245 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "To-do list API",
+    "description": "Documentation for the to-do list API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tasks": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Endpoint to get all Tasks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Endpoint to create new task, then show all tasks",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newTask": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/task/{ID}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Endpoint to show singular tasks based on given ID",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Endpoint to update an existing task based on the given ID",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "updatedTask": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Endpoint to delete a task",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Endpoint to log in with any email and the password m295 and receive session Token",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "pwd": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/verify": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Endpoint to verify session Token",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "delete": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Endpoint to log out",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "task": {
+      "type": "object",
+      "properties": {
+        "Titel": {
+          "type": "string",
+          "example": "Hausaufgaben"
+        },
+        "Beschreibung": {
+          "type": "string",
+          "example": "Mathe: Aufgaben 4 bis 9, Deutsch: text.pdf lesen & zusammenfassen"
+        },
+        "Erstellungsdatum": {
+          "type": "string",
+          "example": "2023-06-16"
+        },
+        "Erfüllungsdatum": {
+          "type": "string",
+          "example": "2023-06-20"
+        },
+        "Priorität": {
+          "type": "string",
+          "example": "Hoch"
+        },
+        "ID": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    }
+  },
+  "tasks": [
+    {
+      "name": "Tasks",
+      "description": "Tasks in the to-do list"
+    },
+    {
+      "name": "Login",
+      "description": "Login, verification and logout data"
+    }
+  ]
+}

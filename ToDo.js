@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 
 // Swagger
-//const swaggerUi = require("swagger-ui-express");
-//const swaggerFile = require("./swagger_output.json");
-//app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger_output.json");
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
