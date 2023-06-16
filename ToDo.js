@@ -199,6 +199,10 @@ app.delete("/logout", (request, response) => {
 });
 
 
+app.use((req, resp) => {
+  console.error("404 - Not Found");
+  resp.sendStatus(404);
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
