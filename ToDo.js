@@ -51,8 +51,9 @@ const tasks = [
 
 app.get("/tasks", (_, response) => {
     // #swagger.tags = ["Tasks"]
-    // #swagger.description = "Endpoint to get Title of all Tasks"
-    console.log("")
+    // #swagger.description = "Endpoint to get all Tasks"
+    console.log("Showing all tasks", tasks);
+    response.header("Content-Type", "application/json");
     response.send(tasks);
 });
 
@@ -62,6 +63,8 @@ app.post("/tasks", (request, response) => {
   // #swagger.description = "Endpoint to create new task, then show all tasks"
   const addTask = request.body.newTask;
   tasks.push(addTask);
+  console.log("New task has been created:", addTask);
+  response.header("Content-Type", "application/json");
   // #swagger.responses[201] = {
   // description: "tasks",
   // shema: [{
@@ -75,11 +78,18 @@ app.get("/task/:ID", (request, response) => {
   const ID = parseInt(request.params.ID);
   const task = tasks.find((task) => task.ID === ID);
   if (!task) {
+    response.header("Content-Type", "application/json");
+    console.log("No task found with id:", ID);
     // #swagger.responses[404] = {
     //    description: "Error"}
     response.sendStatus(404);
   } else {
-  console.log("showing Task with updates")
+    console.log("Showing task with id:", ID);
+    response.header("Content-Type", "application/json");
+  // #swagger.responses[200] = {
+  // description: "Tasks",
+  // schema: {
+  // $ref: "#/definitions/Task"}}
   response.status(200).send(task);
   }
 });
@@ -91,6 +101,8 @@ app.put("/task/:ID", (request, response) => {
   const updatedTask = request.body.updatedTask;
   const taskIndex = tasks.findIndex((task) => task.ID === ID);
   if (taskIndex === -1) {
+    console.log("No task found with id:", ID);
+    response.header("Content-Type", "application/json");
   // #swagger.responses[404] = {
   // description: "Error: Task not found"}
     response.sendStatus(404);
@@ -100,6 +112,8 @@ app.put("/task/:ID", (request, response) => {
       ...tasks[taskIndex],
       ...updatedTask,
     };
+    console.log("Showing task with updates for task with ID:", ID);
+    response.header("Content-Type", "application/json");
   // #swagger.responses[200] = {
   // description: "Tasks",
   // schema: {
@@ -114,13 +128,17 @@ app.delete("/task/:ID", (request, response) => {
   const ID = parseInt(request.params.ID);
   const index = tasks.findIndex((b) => b.ID === ID);
   if (index !== -1) {
+    console.log("Task was deleted. ID:", ID);
     tasks.splice(index, 1);
+    response.header("Content-Type", "application/json");
   // #swagger.responses[204] = {
   // description: "Tasks",
   // shema: [{
   // $ref: "#/definitions/Task"}]}
     response.sendStatus(204);
   } else {
+    console.log("No task found with id:", ID);
+    response.header("Content-Type", "application/json");
   // #swagger.responses[404] = {
   // description: "Error"}
     response.sendStatus(404);
@@ -136,11 +154,13 @@ app.post("/login", (request, response) => {
   const email = request.body.email;
   const emailRegex = /^[^\s@]+@[^\s@]+\.(com|ch)$/;
   if (!email || !emailRegex.test(email) || request.body.pwd !== pwd) {
+  console.log("Login failed. Invalid email or incorrect password");
 // #swagger.responses[401] = {
 // description: "Error"}
   return response.status(401).json({ message: "No Email given or password incorrect!" });
   }
   request.session.email = request.body.email; 
+  console.log("Login successful. User:", email);
 // #swagger.responses[200] = {
 // description: "Login",
 // shema: [{
@@ -152,10 +172,14 @@ app.get("/verify", (request, response) => {
 // #swagger.tags = ["Login"]
 // #swagger.description = "Endpoint to verify session Token"
   if (!request.session.email) {
+  console.log("Verification failed. Cookie is not valid.");
+  response.header("Content-Type", "application/json");
 // #swagger.responses[401] = {
 // description: "Error"}
   return response.status(401).json({ message: "verification failed" });
   }
+  console.log("Verification successful. Session email:", request.session.email);
+  response.header("Content-Type", "application/json");
 // #swagger.responses[200] = {
 // description: "Login",
 // shema: [{
@@ -168,6 +192,8 @@ app.delete("/logout", (request, response) => {
 // #swagger.description = "Endpoint to log out"
   request.session.cookie.maxAge = 0; 
   request.session.destroy();
+  console.log("Logged out user. Session email:", request.session.email);
+  response.header("Content-Type", "application/json");
 // #swagger.responses[204] = {
 // description: "Login",
 // shema: [{
